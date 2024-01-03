@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CandidatureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\CandidatureRepository;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
+#[ApiResource()]
 class Candidature
 {
     #[ORM\Id]
