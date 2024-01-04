@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
+use CandidatureController;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Post;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CandidatureRepository;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
 #[ApiResource()]
+
 class Candidature
 {
     #[ORM\Id]
@@ -15,8 +21,10 @@ class Candidature
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $statut = null;
+    // #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::STRING, options: ["default" => "refusee"])]
+    private string $statut = 'refusee';
+    
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
     #[ORM\JoinColumn(nullable: false)]
@@ -24,7 +32,9 @@ class Candidature
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $candidat = null;
+    private ?User $candidat = null;
+
+   
 
     public function getId(): ?int
     {
@@ -32,8 +42,8 @@ class Candidature
     }
 
     public function getStatut(): ?string
-    {
-        return $this->statut;
+     {
+         return $this->statut;
     }
 
     public function setStatut(string $statut): static
@@ -66,4 +76,6 @@ class Candidature
 
         return $this;
     }
+
+    
 }
