@@ -18,7 +18,7 @@ api_platform:
     keep_legacy_inflector: false
 
     swagger:
-      api_keys:
-        JWT:
-          name: Authorization
-          type: header
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header
